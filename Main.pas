@@ -7,13 +7,14 @@ uses
   Dialogs, StdCtrls, ExtCtrls, ComCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmMain = class(TForm)
     pnlLeft: TPanel;
     pnlRight: TPanel;
     pnlCount: TPanel;
     btnRefresh: TButton;
     lvProcesses: TListView;
     lvPorts: TListView;
+    Splitter1: TSplitter;
     procedure btnRefreshClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lvProcessesChange(Sender: TObject; Item: TListItem; Change:
@@ -66,7 +67,7 @@ const
   Counter_Caption         = 'TCP: %d,     UDP: %d';
 
 var
-  Form1: TForm1;
+  frmMain: TfrmMain;
 
 implementation
 
@@ -74,7 +75,7 @@ uses TlHelp32;
 
 {$R *.dfm}
 
-procedure TForm1.FillList;
+procedure TfrmMain.FillList;
 var
   Snapshot: THandle;
   ProcessEntry: TProcessEntry32;
@@ -99,17 +100,17 @@ begin
   end;
 end;
 
-procedure TForm1.btnRefreshClick(Sender: TObject);
+procedure TfrmMain.btnRefreshClick(Sender: TObject);
 begin
   FillList;
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
+procedure TfrmMain.FormShow(Sender: TObject);
 begin
   FillList;
 end;
 
-procedure TForm1.GetPortListByPID(const pid: Cardinal);
+procedure TfrmMain.GetPortListByPID(const pid: Cardinal);
 var
   i: integer;
   TableSize: DWORD;
@@ -170,7 +171,7 @@ begin
   UpdateCounterCaption(tcp_count, udp_count);
 end;
 
-procedure TForm1.lvProcessesChange(Sender: TObject; Item: TListItem; Change:
+procedure TfrmMain.lvProcessesChange(Sender: TObject; Item: TListItem; Change:
     TItemChange);
 begin
   if Item.SubItems.Count = 0 then
@@ -179,7 +180,7 @@ begin
   GetPortListByPID(StrToInt(Item.SubItems[0]));
 end;
 
-procedure TForm1.UpdateCounterCaption(const tcp, udp: Integer);
+procedure TfrmMain.UpdateCounterCaption(const tcp, udp: Integer);
 begin
   pnlCount.Caption := Format(Counter_Caption, [tcp, udp]);
 end;

@@ -1,4 +1,4 @@
-object Form1: TForm1
+object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'Kullan'#305'lan Portlar'#305' Listele'
@@ -15,18 +15,27 @@ object Form1: TForm1
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 224
+    Top = 0
+    Height = 335
+    Align = alRight
+    ExplicitLeft = 232
+    ExplicitTop = 8
+  end
   object pnlLeft: TPanel
     Left = 0
     Top = 0
-    Width = 227
+    Width = 224
     Height = 335
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 225
+    ExplicitLeft = 227
+    ExplicitTop = -8
     object btnRefresh: TButton
       Left = 1
       Top = 309
-      Width = 225
+      Width = 222
       Height = 25
       Align = alBottom
       Caption = 'Yenile'
@@ -37,7 +46,7 @@ object Form1: TForm1
     object lvProcesses: TListView
       Left = 1
       Top = 1
-      Width = 225
+      Width = 222
       Height = 308
       Align = alClient
       Columns = <
@@ -59,6 +68,7 @@ object Form1: TForm1
       OnChange = lvProcessesChange
       ExplicitLeft = -3
       ExplicitTop = -4
+      ExplicitWidth = 225
     end
   end
   object pnlRight: TPanel
