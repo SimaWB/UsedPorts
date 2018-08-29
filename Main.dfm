@@ -30,8 +30,6 @@ object frmMain: TfrmMain
     Height = 335
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 227
-    ExplicitTop = -8
     object btnRefresh: TButton
       Left = 1
       Top = 309
@@ -41,7 +39,6 @@ object frmMain: TfrmMain
       Caption = 'Yenile'
       TabOrder = 0
       OnClick = btnRefreshClick
-      ExplicitWidth = 223
     end
     object lvProcesses: TListView
       Left = 1
@@ -66,9 +63,6 @@ object frmMain: TfrmMain
       TabOrder = 1
       ViewStyle = vsReport
       OnChange = lvProcessesChange
-      ExplicitLeft = -3
-      ExplicitTop = -4
-      ExplicitWidth = 225
     end
   end
   object pnlRight: TPanel
@@ -78,7 +72,6 @@ object frmMain: TfrmMain
     Height = 335
     Align = alRight
     TabOrder = 1
-    ExplicitLeft = 246
     object pnlCount: TPanel
       Left = 1
       Top = 309
@@ -87,8 +80,13 @@ object frmMain: TfrmMain
       Align = alBottom
       BevelInner = bvLowered
       Caption = 'TCP: 0     UDP: 0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 0
-      ExplicitTop = 310
     end
     object lvPorts: TListView
       Left = 1
@@ -110,11 +108,10 @@ object frmMain: TfrmMain
       ColumnClick = False
       ReadOnly = True
       RowSelect = True
+      SortType = stData
       TabOrder = 1
       ViewStyle = vsReport
-      ExplicitTop = 25
-      ExplicitWidth = 111
-      ExplicitHeight = 285
+      OnCompare = lvPortsCompare
     end
   end
 end

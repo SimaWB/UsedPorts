@@ -17,6 +17,8 @@ type
     Splitter1: TSplitter;
     procedure btnRefreshClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure lvPortsCompare(Sender: TObject; Item1, Item2: TListItem; Data:
+        Integer; var Compare: Integer);
     procedure lvProcessesChange(Sender: TObject; Item: TListItem; Change:
         TItemChange);
   private
@@ -169,6 +171,16 @@ begin
     lvPorts.Items.EndUpdate;
   end;
   UpdateCounterCaption(tcp_count, udp_count);
+end;
+
+procedure TfrmMain.lvPortsCompare(Sender: TObject; Item1, Item2: TListItem;
+    Data: Integer; var Compare: Integer);
+begin
+  try
+    Compare := StrToInt(Item1.Caption) - StrToInt(Item2.Caption);
+  except
+    Compare := 0;
+  end;
 end;
 
 procedure TfrmMain.lvProcessesChange(Sender: TObject; Item: TListItem; Change:
