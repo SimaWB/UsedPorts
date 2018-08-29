@@ -63,7 +63,6 @@ type
     TableClass: Integer; Reserved: LongWord): LongInt; stdcall; external 'iphlpapi.dll';
 
 const
-  AF_INET                 = 2; // WinSock
   TCP_TABLE_OWNER_PID_ALL = 5;
   UDP_TABLE_OWNER_PID     = 1;
   Counter_Caption         = 'TCP: %d,     UDP: %d';
@@ -73,7 +72,7 @@ var
 
 implementation
 
-uses TlHelp32;
+uses TlHelp32, WinSock;
 
 {$R *.dfm}
 
@@ -137,8 +136,8 @@ begin
             Inc(tcp_count);
             with lvPorts.Items.Add do
             begin
-              Caption :=  IntToStr(FExtendedTcpTable.Table[i].dwLocalPort);
-              SubItems.Add(IntToStr(FExtendedTcpTable.Table[i].dwRemotePort));
+              Caption :=  IntToStr(ntohs(FExtendedTcpTable.Table[i].dwLocalPort));
+              SubItems.Add(IntToStr(ntohs(FExtendedTcpTable.Table[i].dwRemotePort)));
               SubItems.Add('TCP');
             end;
           end;
@@ -159,7 +158,7 @@ begin
             Inc(udp_count);
             with lvPorts.Items.Add do
             begin
-              Caption :=  IntToStr(FExtendedUdpTable.Table[i].dwLocalPort);
+              Caption :=  IntToStr(ntohs(FExtendedUdpTable.Table[i].dwLocalPort));
               SubItems.Add('');
               SubItems.Add('UDP');
             end;
